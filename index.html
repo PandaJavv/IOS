@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechNusa — Blog Teknologi Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- ✅ GOOGLE ADSENSE SCRIPT -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3697008791080875"
+     crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0e0c;
+      --surface: #1a1916;
+      --border: #2e2d29;
+      --text: #e8e4d9;
+      --muted: #7a776e;
+      --accent: #d4a843;
+      --accent2: #c96b3a;
+      --ad-bg: #141312;
+      --ad-border: #3a3830;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,14,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── TOP LEADERBOARD AD ─── */
+    .ad-leaderboard {
+      background: var(--ad-bg);
+      border-bottom: 1px solid var(--ad-border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 12px;
+      min-height: 100px;
+    }
+    .ad-label {
+      font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ad-placeholder {
+      width: 728px; max-width: 100%; height: 90px;
+      background: linear-gradient(135deg, #1e1d1a 0%, #252420 50%, #1e1d1a 100%);
+      border: 1px dashed var(--ad-border);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px;
+      position: relative; overflow: hidden;
+    }
+    .ad-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(212,168,67,0.04), transparent);
+      animation: shimmer 2.5s infinite;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    .ad-placeholder-text {
+      font-size: 0.8rem; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ad-placeholder-text svg { opacity: 0.5; }
+    .ad-google-badge {
+      font-size: 0.7rem; color: #4285F4;
+      background: rgba(66,133,244,0.1);
+      border: 1px solid rgba(66,133,244,0.2);
+      padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .layout {
+      max-width: 1200px; margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ─── HERO ARTICLE ─── */
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent);
+      background: rgba(212,168,67,0.1);
+      border: 1px solid rgba(212,168,67,0.2);
+      padding: 3px 10px; border-radius: 99px;
+      margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: #000;
+    }
+    .meta-info { font-size: 0.82rem; color: var(--muted); }
+    .meta-info strong { color: var(--text); display: block; }
+    .hero-img {
+      width: 100%; height: 340px;
+      background: linear-gradient(135deg, #1e2a1a 0%, #1a1e2a 50%, #2a1a1e 100%);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-img::after {
+      content: '🖼️  Featured Image';
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .hero-excerpt {
+      font-size: 1.05rem; color: #b0ac9f;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    /* ─── IN-ARTICLE AD ─── */
+    .ad-inline {
+      margin: 2rem 0;
+      background: var(--ad-bg);
+      border: 1px dashed var(--ad-border);
+      border-radius: 6px;
+      padding: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .ad-inline .ad-placeholder { width: 100%; max-width: 468px; height: 60px; }
+
+    .article-body p { margin-bottom: 1.2rem; color: #b0ac9f; }
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin: 2rem 0 0.8rem;
+    }
+
+    /* ─── ARTICLE CARDS ─── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text); margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .card-list { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      display: flex; gap: 1rem;
+      transition: border-color .2s, transform .2s;
+      cursor: pointer;
+    }
+    .card:hover { border-color: var(--accent); transform: translateX(3px); }
+    .card-thumb {
+      width: 80px; height: 70px; flex-shrink: 0;
+      background: linear-gradient(135deg, #1e2a1a, #2a1e2a);
+      border-radius: 4px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .card-tag {
+      font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--accent2);
+      font-weight: 600;
+    }
+    .card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; line-height: 1.3;
+      margin: 3px 0 4px; color: var(--text);
+    }
+    .card-date { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar { display: flex; flex-direction: column; gap: 1.8rem; }
+
+    /* Sidebar Ad */
+    .ad-sidebar {
+      background: var(--ad-bg);
+      border: 1px dashed var(--ad-border);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .ad-sidebar .ad-placeholder { width: 100%; max-width: 300px; height: 250px; flex-direction: column; gap: 8px; }
+
+    /* Popular */
+    .widget { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; }
+    .widget-title {
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .popular-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .popular-item:last-child { border-bottom: none; }
+    .popular-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--border); line-height: 1;
+      width: 24px; flex-shrink: 0;
+    }
+    .popular-text { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .popular-text strong { color: var(--text); display: block; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 0.75rem; padding: 4px 12px;
+      border: 1px solid var(--border); border-radius: 99px;
+      color: var(--muted); cursor: pointer;
+      transition: all .2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(212,168,67,0.05); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    footer span { color: var(--accent); }
+
+    /* ─── ADSENSE CODE SNIPPET ─── */
+    .code-box {
+      background: #0a0a08;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-top: 2rem;
+    }
+    .code-box .code-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px; }
+    .code-box pre { font-size: 0.78rem; color: #8bc34a; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+    .code-box .cm { color: var(--muted); }
+    .code-box .tg { color: #f48fb1; }
+    .code-box .at { color: #80cbc4; }
+    .code-box .vl { color: #ffcc02; }
+
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">TechNusa</div>
+  <ul class="nav-links">
+    <li><a href="#">Beranda</a></li>
+    <li><a href="#">AI & ML</a></li>
+    <li><a href="#">Programming</a></li>
+    <li><a href="#">Gadget</a></li>
+    <li><a href="#">Tutorial</a></li>
+  </ul>
+</nav>
+
+<!-- 📢 AD SLOT 1: Leaderboard (728×90) — Atas halaman -->
+<div class="ad-leaderboard">
+  <div class="ad-label">Iklan</div>
+  <div class="ad-placeholder">
+    <div class="ad-placeholder-text">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+      </svg>
+      Google AdSense — Leaderboard 728×90
+    </div>
+    <span class="ad-google-badge">Google</span>
+  </div>
+
+  <!-- ✅ KODE ASLI ADSENSE (uncomment & isi publisher ID setelah disetujui) -->
+  <!--
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:728px;height:90px"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="1234567890"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+</div>
+
+<!-- LAYOUT UTAMA -->
+<div class="layout">
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- HERO ARTICLE -->
+    <span class="hero-tag">🔥 Trending</span>
+    <h1 class="hero-title">
+      Revolusi <span>AI Generatif</span> Mengubah Cara Kita Menulis Kode
+    </h1>
+    <div class="hero-meta">
+      <div class="avatar">AZ</div>
+      <div class="meta-info">
+        <strong>Ahmad Zainal</strong>
+        31 Mei 2026 &nbsp;·&nbsp; 8 menit baca
+      </div>
+    </div>
+    <div class="hero-img"></div>
+
+    <div class="article-body">
+      <p class="hero-excerpt">
+        Dalam dua tahun terakhir, tools AI seperti GitHub Copilot, Claude, dan Gemini telah mengubah alur kerja jutaan developer. Artikel ini mengupas dampak nyata dan masa depan yang sedang kita bangun.
+      </p>
+
+      <h3>Produktivitas yang Meningkat Drastis</h3>
+      <p>Survei terbaru dari Stack Overflow menunjukkan lebih dari 76% developer aktif menggunakan AI assistant dalam pekerjaan sehari-hari mereka. Bukan sekadar autocomplete biasa, AI kini mampu menghasilkan fungsi lengkap, menulis unit test, bahkan mendebug kode yang kompleks.</p>
+      <p>Perubahan ini bukan berarti programmer akan digantikan—melainkan perannya bergeser ke arah arsitektur, review kode, dan pemikiran sistem yang lebih tinggi.</p>
+
+      <!-- 📢 AD SLOT 2: Banner In-Article (468×60) — Di tengah konten -->
+      <div class="ad-inline">
+        <div class="ad-label">Iklan</div>
+        <div class="ad-placeholder">
+          <div class="ad-placeholder-text">Google AdSense — Banner 468×60</div>
+        </div>
+        <!-- ✅ KODE ASLI (uncomment setelah disetujui):
+        <ins class="adsbygoogle"
+             style="display:block;text-align:center"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="9876543210"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+      </div>
+
+      <h3>Apa yang Berubah bagi Developer Junior?</h3>
+      <p>Developer baru kini bisa memulai project lebih cepat tanpa harus menghafal semua syntax. Namun ini juga membawa tantangan: pemahaman konsep fundamental tetap krusial agar output AI bisa di-review dengan benar.</p>
+      <p>Framework dan library terus berkembang, dan AI yang ditraining pada data lama kadang memberikan solusi yang sudah usang. Critical thinking tetap menjadi skill nomor satu.</p>
+    </div>
+
+    <!-- ─── MORE ARTICLES ─── -->
+    <div style="margin-top: 2.5rem;">
+      <div class="section-title">Artikel Terkini</div>
+      <div class="card-list">
+        <div class="card">
+          <div class="card-thumb">⚡</div>
+          <div>
+            <div class="card-tag">Tutorial</div>
+            <h4>Cara Deploy Aplikasi Node.js ke VPS dengan Nginx & PM2</h4>
+            <div class="card-date">29 Mei 2026</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb">🤖</div>
+          <div>
+            <div class="card-tag">AI</div>
+            <h4>Claude 4 vs GPT-5: Mana yang Lebih Cocok untuk Developer?</h4>
+            <div class="card-date">27 Mei 2026</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb">🎮</div>
+          <div>
+            <div class="card-tag">Game Dev</div>
+            <h4>Membuat Plugin Minecraft dari Nol dengan Java & Paper API</h4>
+            <div class="card-date">24 Mei 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO BOX: Cara Pasang Kode Asli -->
+    <div class="code-box">
+      <div class="code-label">💡 Cara Pasang Google AdSense (Kode Asli)</div>
+      <pre><span class="cm">&lt;!-- 1. Pasang script ini di &lt;head&gt; --&gt;</span>
+<span class="tg">&lt;script</span> <span class="at">async src</span>=<span class="vl">"https://pagead2.googlesyndication.com/
+         pagead/js/adsbygoogle.js?client=ca-pub-XXXXXX"</span>
+        <span class="at">crossorigin</span>=<span class="vl">"anonymous"</span><span class="tg">&gt;&lt;/script&gt;</span>
+
+<span class="cm">&lt;!-- 2. Taruh unit iklan di posisi yang kamu mau --&gt;</span>
+<span class="tg">&lt;ins</span> <span class="at">class</span>=<span class="vl">"adsbygoogle"</span>
+     <span class="at">style</span>=<span class="vl">"display:block"</span>
+     <span class="at">data-ad-client</span>=<span class="vl">"ca-pub-XXXXXXXXXXXXXXXX"</span>
+     <span class="at">data-ad-slot</span>=<span class="vl">"1234567890"</span>
+     <span class="at">data-ad-format</span>=<span class="vl">"auto"</span><span class="tg">&gt;&lt;/ins&gt;</span>
+<span class="tg">&lt;script&gt;</span>(adsbygoogle = window.adsbygoogle || []).push({});<span class="tg">&lt;/script&gt;</span></pre>
+    </div>
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- 📢 AD SLOT 3: Sidebar Rectangle (300×250) -->
+    <div class="ad-sidebar">
+      <div class="ad-label">Iklan</div>
+      <div class="ad-placeholder">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="1.5" opacity="0.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="ad-placeholder-text" style="flex-direction:column;text-align:center">
+          <span>Google AdSense</span>
+          <span>Rectangle 300×250</span>
+        </div>
+        <span class="ad-google-badge">Google Ads</span>
+      </div>
+      <!-- ✅ KODE ASLI:
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:300px;height:250px"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="1122334455"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </div>
+
+    <!-- POPULAR POSTS -->
+    <div class="widget">
+      <div class="widget-title">📈 Populer Minggu Ini</div>
+      <div class="popular-item">
+        <div class="popular-num">01</div>
+        <div class="popular-text"><strong>10 Framework JavaScript Terbaik 2026</strong>Perbandingan lengkap dari React hingga Svelte 5</div>
+      </div>
+      <div class="popular-item">
+        <div class="popular-num">02</div>
+        <div class="popular-text"><strong>Belajar Rust dalam 30 Hari</strong>Roadmap untuk developer Python dan JS</div>
+      </div>
+      <div class="popular-item">
+        <div class="popular-num">03</div>
+        <div class="popular-text"><strong>Docker vs Podman di 2026</strong>Mana yang lebih baik untuk production?</div>
+      </div>
+    </div>
+
+    <!-- 📢 AD SLOT 4: Sidebar kedua (300×250) -->
+    <div class="ad-sidebar">
+      <div class="ad-label">Iklan</div>
+      <div class="ad-placeholder" style="height:250px;flex-direction:column;gap:8px">
+        <div class="ad-placeholder-text" style="flex-direction:column;text-align:center">
+          <span>Google AdSense</span>
+          <span>Sidebar 300×250</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS -->
+    <div class="widget">
+      <div class="widget-title">🏷️ Topik</div>
+      <div class="tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">AI</span>
+        <span class="tag">Python</span>
+        <span class="tag">Minecraft</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Linux</span>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Java</span>
+        <span class="tag">DevOps</span>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>TechNusa</span> — Blog Teknologi untuk Developer Indonesia</p>
+  <p style="margin-top:4px">Iklan dikelola melalui <span>Google AdSense</span></p>
+</footer>
+
+</body>
+</html>
